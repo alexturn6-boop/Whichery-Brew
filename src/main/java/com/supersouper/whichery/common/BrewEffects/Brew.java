@@ -1,6 +1,5 @@
 package com.supersouper.whichery.common.BrewEffects;
 
-
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.world.World;
 
@@ -43,7 +42,6 @@ public class Brew {
 
     }
 
-
     // handles effects for onEntity effects, only brew type entity and duration are needed
     public void onEntity(EntityLivingBase entity) {
 
@@ -54,15 +52,27 @@ public class Brew {
 
     }
 
-    public void updatePower(int newValue) { this.power = newValue; }
+    public void updatePower(int newValue) {
+        this.power = newValue;
+    }
 
-    public void updateDuration(int newValue) { this.duration = newValue; }
+    public void updateDuration(int newValue) {
+        this.duration = newValue;
+    }
 
-    public void updateSpeed(int newValue) { this.speed = newValue; }
+    public void updateSpeed(int newValue) {
+        this.speed = newValue;
+    }
 
-    public void updateDispersal(int newValue) { this.dispersal = newValue; }
+    public void updateDispersal(int newValue) {
+        this.dispersal = newValue;
+    }
 
-    public void updateLinger(int newValue) { this.linger = newValue; }
+    public void updateLinger(int newValue) {
+        this.linger = newValue;
+    }
 
-    public void updateType(int newValue) { this.type = newValue; }
+    public void updateType(int newValue) {
+        this.type = newValue;
+    }
 }

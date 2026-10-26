@@ -1,12 +1,11 @@
 package com.supersouper.whichery;
 
-import com.supersouper.whichery.common.BrewEffects.Brew;
-import com.supersouper.whichery.common.BrewEffects.BrewType.BrewFreeze;
-import com.supersouper.whichery.common.BrewEffects.BrewType.BrewLaunch;
-import com.supersouper.whichery.common.BrewEffects.BrewType.BrewNetherize;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
+import com.supersouper.whichery.common.BrewEffects.BrewType.BrewFreeze;
+import com.supersouper.whichery.common.BrewEffects.BrewType.BrewLaunch;
+import com.supersouper.whichery.common.BrewEffects.BrewType.BrewNetherize;
 import com.supersouper.whichery.common.items.ItemChalk;
 import com.supersouper.whichery.common.items.ItemRawChickenThatMakesYouBecomeAVampire;
 import com.supersouper.whichery.common.items.brews.ItemBrewGeneric;

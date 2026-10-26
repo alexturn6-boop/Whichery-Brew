@@ -1,20 +1,18 @@
 package com.supersouper.whichery.common.items.brews;
 
-import com.supersouper.whichery.common.BrewEffects.Brew;
+import java.util.List;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
+import com.supersouper.whichery.common.BrewEffects.Brew;
 import com.supersouper.whichery.common.entity.EntityBrew;
-
-import java.util.List;
 
 public class ItemBrewGeneric extends Item {
 
     public Brew brew;
-
-
 
     public ItemBrewGeneric(Brew brew) {
         this.brew = brew;
@@ -23,7 +21,7 @@ public class ItemBrewGeneric extends Item {
     }
 
     public ItemStack onItemRightClick(ItemStack itemStackIn, World world, EntityPlayer player) {
-        if (brew != null  && brew.type != 0) {
+        if (brew != null && brew.type != 0) {
 
             if (!player.capabilities.isCreativeMode) {
                 --itemStackIn.stackSize;
@@ -41,21 +39,26 @@ public class ItemBrewGeneric extends Item {
         return itemStackIn;
     }
 
-
-
     @Override
-    public void addInformation(ItemStack itemStackIn, EntityPlayer player, List<String> list, boolean par4){
+    public void addInformation(ItemStack itemStackIn, EntityPlayer player, List<String> list, boolean par4) {
         // not sure what the bool is for but this should be adding extra info to the brews
         if (brew != null) {
-            list.add(this.brew.id + ": (" + (brew.duration / (20*60)) + ":" +
-                (brew.duration / (20) % 60) + ")");
+            list.add(this.brew.id + ": (" + (brew.duration / (20 * 60)) + ":" + (brew.duration / (20) % 60) + ")");
 
             switch (this.brew.type) {
-                case 0: return;
-                case 1: list.add("Splash"); break;
-                case 2: list.add("Gas"); break;
-                case 3: list.add("Liquid"); break;
-                default: break;
+                case 0:
+                    return;
+                case 1:
+                    list.add("Splash");
+                    break;
+                case 2:
+                    list.add("Gas");
+                    break;
+                case 3:
+                    list.add("Liquid");
+                    break;
+                default:
+                    break;
 
             }
 

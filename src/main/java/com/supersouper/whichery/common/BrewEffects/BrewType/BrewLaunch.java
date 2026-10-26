@@ -1,8 +1,8 @@
 package com.supersouper.whichery.common.BrewEffects.BrewType;
 
-import com.supersouper.whichery.common.BrewEffects.Brew;
 import net.minecraft.entity.EntityLivingBase;
 
+import com.supersouper.whichery.common.BrewEffects.Brew;
 
 public class BrewLaunch extends Brew {
 
@@ -11,7 +11,7 @@ public class BrewLaunch extends Brew {
     }
 
     @Override
-    public void onEntity(EntityLivingBase entity){
-        entity.setVelocity(entity.motionX,entity.motionY + (0.75F * (power + 1)),entity.motionZ );
+    public void onEntity(EntityLivingBase entity) {
+        entity.setVelocity(entity.motionX, entity.motionY + (0.75F * (power + 1)), entity.motionZ);
     }
 }

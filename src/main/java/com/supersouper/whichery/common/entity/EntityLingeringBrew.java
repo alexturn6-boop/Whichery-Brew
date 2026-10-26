@@ -1,15 +1,16 @@
 package com.supersouper.whichery.common.entity;
 
-import com.supersouper.whichery.common.BrewEffects.Brew;
-import com.supersouper.whichery.common.BrewEffects.BrewHelper;
+import java.util.Iterator;
+import java.util.List;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 
-import java.util.Iterator;
-import java.util.List;
+import com.supersouper.whichery.common.BrewEffects.Brew;
+import com.supersouper.whichery.common.BrewEffects.BrewHelper;
 
 public class EntityLingeringBrew extends Entity {
 
@@ -25,7 +26,6 @@ public class EntityLingeringBrew extends Entity {
         this.setInvisible(true);
 
     }
-
 
     @Override
     protected void entityInit() {
@@ -52,8 +52,7 @@ public class EntityLingeringBrew extends Entity {
                 compound.getInteger("speed"),
                 compound.getInteger("dispersal"),
                 compound.getInteger("linger"),
-                compound.getInteger("type")
-            );
+                compound.getInteger("type"));
             this.ticksRemaining = compound.getInteger("ticksRemaining");
         }
     }
@@ -62,7 +61,7 @@ public class EntityLingeringBrew extends Entity {
     public void writeEntityToNBT(NBTTagCompound compound) {
 
         if (this.brew != null) {
-            compound.setString("brew-id",this.brew.id);
+            compound.setString("brew-id", this.brew.id);
             compound.setInteger("dispersal", this.brew.dispersal);
             compound.setInteger("duration", this.brew.duration);
             compound.setInteger("linger", this.brew.linger);
@@ -77,6 +76,7 @@ public class EntityLingeringBrew extends Entity {
         }
 
     }
+
     @Override
     public void onUpdate() {
         super.onUpdate();
@@ -85,15 +85,13 @@ public class EntityLingeringBrew extends Entity {
         }
     }
 
-
     @Override
-    public void onEntityUpdate(){
+    public void onEntityUpdate() {
         super.onEntityUpdate();
 
-        int currentX = (int)Math.floor(this.posX);
-        int currentY = (int)Math.floor(this.posY);
-        int currentZ = (int)Math.floor(this.posZ);
-
+        int currentX = (int) Math.floor(this.posX);
+        int currentY = (int) Math.floor(this.posY);
+        int currentZ = (int) Math.floor(this.posZ);
 
         if (brew != null && ticksRemaining % 20 == 0) {
 
@@ -109,9 +107,13 @@ public class EntityLingeringBrew extends Entity {
 
             }
 
-
-            AxisAlignedBB axisalignedbb = AxisAlignedBB.getBoundingBox(currentX - radius, currentY - heightRadius, currentZ - radius,
-                currentX + radius, currentY + heightRadius, currentZ + radius);
+            AxisAlignedBB axisalignedbb = AxisAlignedBB.getBoundingBox(
+                currentX - radius,
+                currentY - heightRadius,
+                currentZ - radius,
+                currentX + radius,
+                currentY + heightRadius,
+                currentZ + radius);
             List<EntityLivingBase> list = this.worldObj.getEntitiesWithinAABB(EntityLivingBase.class, axisalignedbb);
             Iterator<EntityLivingBase> iterator = list.iterator();
             EntityLivingBase entity;
@@ -124,10 +126,9 @@ public class EntityLingeringBrew extends Entity {
 
         }
 
-
         if (!worldObj.isRemote) {
 
-            if (ticksRemaining <= 0){
+            if (ticksRemaining <= 0) {
                 this.setDead();
             }
             ticksRemaining -= 1;
@@ -135,7 +136,7 @@ public class EntityLingeringBrew extends Entity {
 
     }
 
-    public void setBrew(Brew newBrew){
+    public void setBrew(Brew newBrew) {
         brew = newBrew;
         // this should be whatever value is being stored as the color
         this.dataWatcher.updateObject(20, brew.power);
@@ -151,9 +152,8 @@ public class EntityLingeringBrew extends Entity {
         double colorG = 0.5F;
         double colorB = 0.5F;
 
-
-        double offsetX = rand.nextFloat() * (double)radius * 2.0F - (double)radius;
-        double offsetZ = rand.nextFloat() * (double)radius * 2.0F - (double)radius;
+        double offsetX = rand.nextFloat() * (double) radius * 2.0F - (double) radius;
+        double offsetZ = rand.nextFloat() * (double) radius * 2.0F - (double) radius;
 
         if (storedColor == 1) {
             colorR = 1.0F;

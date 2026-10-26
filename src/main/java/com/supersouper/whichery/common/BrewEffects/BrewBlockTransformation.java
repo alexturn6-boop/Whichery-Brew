@@ -1,6 +1,5 @@
 package com.supersouper.whichery.common.BrewEffects;
 
-import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 
