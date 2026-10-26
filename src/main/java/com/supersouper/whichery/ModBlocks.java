@@ -1,10 +1,13 @@
 package com.supersouper.whichery;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.Fluid;
 
+import com.supersouper.whichery.common.blocks.BlockBrewFluid;
 import com.supersouper.whichery.common.blocks.BlockChalk;
 import com.supersouper.whichery.common.blocks.crops.BlockCropFirePoppy;
 import com.supersouper.whichery.common.blocks.crops.BlockCropMandrake;
@@ -23,6 +26,7 @@ public enum ModBlocks {
     MANDRAKE(true, new BlockCropMandrake("mandrake", 3), "crop_mandrake"),
     SILPHIUM(true, new BlockCropSilphium("silphium",3), "crop_silphium"),
     FIRE_POPPY(true, new BlockCropFirePoppy("fire_poppy",2),"crop_fire_poppy"),
+    BREW_FLUID(true, new BlockBrewFluid(new Fluid("water"), Material.water), "brew_fluid")
     ; // leave trailing semicolon
     // spotless:on
 

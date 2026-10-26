@@ -1,5 +1,7 @@
 package com.supersouper.whichery;
 
+import com.supersouper.whichery.common.entity.EntityBrew;
+import com.supersouper.whichery.common.entity.EntityLingeringBrew;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
 
@@ -9,7 +11,10 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 
 public enum ModEntities {
 
-    MANDRAKE_ROOT(EntityMandrakeRoot.class, "MandrakeRoot", 0x724b2c, 0x0a4b2c);
+    MANDRAKE_ROOT(EntityMandrakeRoot.class, "MandrakeRoot", 0x724b2c, 0x0a4b2c),
+    THROWN_BREW(EntityBrew.class, "Brew", -1, -1),
+    LINGER_BREW(EntityLingeringBrew.class, "LingeringBrew", -1, -1),
+    ;
 
     private final Class<? extends Entity> entityClass;
     private final String name;

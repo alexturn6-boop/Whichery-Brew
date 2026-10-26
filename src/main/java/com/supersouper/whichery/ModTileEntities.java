@@ -3,6 +3,7 @@ package com.supersouper.whichery;
 import net.minecraft.tileentity.TileEntity;
 
 import com.supersouper.whichery.common.tileentities.ChalkTileEntity;
+import com.supersouper.whichery.common.tileentities.LiquidTileEntity;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -10,7 +11,8 @@ public enum ModTileEntities {
     // spotless:off
 
     // make sure to leave a trailing comma
-    CHALK(true, ChalkTileEntity.class, "")
+    CHALK(true, ChalkTileEntity.class, ""),
+    LIQUID_BREW(true, LiquidTileEntity.class, "liquid_tile_entity"),
     ;
     // spotless:on
 

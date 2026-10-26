@@ -1,10 +1,15 @@
 package com.supersouper.whichery;
 
+import com.supersouper.whichery.common.BrewEffects.Brew;
+import com.supersouper.whichery.common.BrewEffects.BrewType.BrewFreeze;
+import com.supersouper.whichery.common.BrewEffects.BrewType.BrewLaunch;
+import com.supersouper.whichery.common.BrewEffects.BrewType.BrewNetherize;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 import com.supersouper.whichery.common.items.ItemChalk;
 import com.supersouper.whichery.common.items.ItemRawChickenThatMakesYouBecomeAVampire;
+import com.supersouper.whichery.common.items.brews.ItemBrewGeneric;
 import com.supersouper.whichery.common.items.seeds.ItemSeedFirePoppy;
 import com.supersouper.whichery.common.items.seeds.ItemSeedMandrake;
 import com.supersouper.whichery.common.items.seeds.ItemSeedSilphium;
@@ -27,6 +32,12 @@ public enum ModItems {
     SILPHIUM_FLOWER(true, new Item().setTextureName("whichery:silphium_flower").setUnlocalizedName("silphium_flower"), "silphium_flower"),
     SILPHIUM_WILTED_FLOWER(true, new Item().setTextureName("whichery:silphium_wilted_flower").setUnlocalizedName("silphium_wilted_flower"), "silphium_wilted_flower"),
     FIRE_POPPY_SEED(true, new ItemSeedFirePoppy(), "seed_fire_poppy"),
+    TEST_BREW_ONE(true, new ItemBrewGeneric(new BrewFreeze("freeze",1,500,1,1,1,3)), "generic_brew_1"),
+    TEST_BREW_TWO(true, new ItemBrewGeneric(new BrewNetherize("netherize",1,500,1,1,1,3)), "generic_brew_2"),
+    TEST_BREW_THREE(true, new ItemBrewGeneric(new BrewLaunch("launch",1,500,1,1,1,3)), "generic_brew_3"),
+    TEST_BREW_FOUR(true, new ItemBrewGeneric(new BrewFreeze("freeze",1,500,1,1,1,1)), "generic_brew_4"),
+    TEST_BREW_FIVE(true, new ItemBrewGeneric(new BrewNetherize("netherize",1,500,1,1,1,1)), "generic_brew_5"),
+    TEST_BREW_SIX(true, new ItemBrewGeneric(new BrewLaunch("launch",1,500,1,1,1,1)), "generic_brew_6"),
     ; // leave trailing semicolon
     // spotless:on
 
