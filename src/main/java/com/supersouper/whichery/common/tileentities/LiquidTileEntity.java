@@ -2,6 +2,7 @@ package com.supersouper.whichery.common.tileentities;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
@@ -18,6 +19,14 @@ public class LiquidTileEntity extends TileEntity {
     public Brew brew;
     public int ticksRemaining = 100;
 
+    public LiquidTileEntity(Brew brew, int ticksRemaining){
+        this.brew = brew;
+        this.ticksRemaining = ticksRemaining;
+    }
+    public LiquidTileEntity(){
+        super();
+    }
+
     @Override
     public void updateEntity() {
         int x = this.xCoord;
@@ -27,57 +36,6 @@ public class LiquidTileEntity extends TileEntity {
         if (brew != null) {
 
             if (ticksRemaining % 20 == 0) {
-                // gets adjacent tile entities
-                LiquidTileEntity posXTileEntity = (LiquidTileEntity) this.worldObj.getTileEntity(x + 1, y, z);
-                LiquidTileEntity negXTileEntity = (LiquidTileEntity) this.worldObj.getTileEntity(x - 1, y, z);
-                LiquidTileEntity negYTileEntity = (LiquidTileEntity) this.worldObj.getTileEntity(x, y - 1, z);
-                LiquidTileEntity posZTileEntity = (LiquidTileEntity) this.worldObj.getTileEntity(x, y, z + 1);
-                LiquidTileEntity negZTileEntity = (LiquidTileEntity) this.worldObj.getTileEntity(x, y, z - 1);
-
-                // gets adjacent blocks
-
-                Block posXBlock = this.worldObj.getBlock(x + 1, y, z);
-                Block negXBlock = this.worldObj.getBlock(x - 1, y, z);
-                Block negYBlock = this.worldObj.getBlock(x, y - 1, z);
-                Block posZBlock = this.worldObj.getBlock(x, y, z + 1);
-                Block negZBlock = this.worldObj.getBlock(x, y, z - 1);
-
-                // checks orthogonal directions and spreads the tile entity incase there are any adjacent blank tiles
-                if (posXTileEntity != null && posXBlock == ModBlocks.BREW_FLUID.get()
-                    && posXTileEntity.getBrew() == null) {
-
-                    posXTileEntity.setBrew(this.brew);
-                    posXTileEntity.setTicksRemaining(this.ticksRemaining);
-
-                }
-                if (negXTileEntity != null && negXBlock == ModBlocks.BREW_FLUID.get()
-                    && negXTileEntity.getBrew() == null) {
-
-                    negXTileEntity.setBrew(this.brew);
-                    negXTileEntity.setTicksRemaining(this.ticksRemaining);
-
-                }
-                if (negYTileEntity != null && negYBlock == ModBlocks.BREW_FLUID.get()
-                    && negYTileEntity.getBrew() == null) {
-
-                    negYTileEntity.setBrew(this.brew);
-                    negYTileEntity.setTicksRemaining(this.ticksRemaining);
-
-                }
-                if (posZTileEntity != null && posZBlock == ModBlocks.BREW_FLUID.get()
-                    && posZTileEntity.getBrew() == null) {
-
-                    posZTileEntity.setBrew(this.brew);
-                    posZTileEntity.setTicksRemaining(this.ticksRemaining);
-
-                }
-                if (negZTileEntity != null && negZBlock == ModBlocks.BREW_FLUID.get()
-                    && negZTileEntity.getBrew() == null) {
-
-                    negZTileEntity.setBrew(this.brew);
-                    negZTileEntity.setTicksRemaining(this.ticksRemaining);
-
-                }
 
                 // handles effects on entities
                 AxisAlignedBB axisalignedbb = AxisAlignedBB.getBoundingBox(x, y, z, x + 1, y + 1, z + 1);
@@ -168,6 +126,12 @@ public class LiquidTileEntity extends TileEntity {
 
     public Brew getBrew() {
         return this.brew;
+    }
+
+    public int getTicksRemaining() {return  this.ticksRemaining;}
+    @Override
+    public boolean canUpdate(){
+        return this.brew != null && !Objects.equals(this.brew.id, "color");
     }
 
 }

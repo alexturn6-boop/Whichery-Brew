@@ -85,20 +85,8 @@ public class EntityBrew extends EntityThrowable {
 
                     this.worldObj.setBlock(currentX, currentY, currentZ, ModBlocks.BREW_FLUID.get());
 
-                    TileEntity liquidTileEntity = new LiquidTileEntity();
+                    TileEntity liquidTileEntity = new LiquidTileEntity(brew, (brew.linger + 1) * 300);
 
-                    NBTTagCompound nbtData = new NBTTagCompound();
-
-                    nbtData.setString("brew-id", this.brew.id);
-                    nbtData.setInteger("dispersal", this.brew.dispersal);
-                    nbtData.setInteger("duration", this.brew.duration);
-                    nbtData.setInteger("linger", this.brew.linger);
-                    nbtData.setInteger("power", this.brew.power);
-                    nbtData.setInteger("speed", this.brew.speed);
-                    nbtData.setInteger("type", this.brew.type);
-                    nbtData.setInteger("ticksRemaining", (brew.linger + 1) * 300);
-
-                    liquidTileEntity.readFromNBT(nbtData);
                     this.worldObj.removeTileEntity(currentX, currentY, currentZ);
                     this.worldObj.setTileEntity(currentX, currentY, currentZ, liquidTileEntity);
                 }

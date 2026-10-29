@@ -1,8 +1,11 @@
 package com.supersouper.whichery.common.blocks;
 
+import com.supersouper.whichery.ModBlocks;
+import com.supersouper.whichery.common.BrewEffects.Brew;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
@@ -13,6 +16,8 @@ import com.supersouper.whichery.common.tileentities.LiquidTileEntity;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+
+import java.util.Random;
 
 public class BlockBrewFluid extends BlockFluidClassic implements ITileEntityProvider {
 
@@ -55,6 +60,48 @@ public class BlockBrewFluid extends BlockFluidClassic implements ITileEntityProv
             return icons[0];
         } else {
             return icons[1];
+        }
+    }
+
+    @Override
+    public void updateTick(World world, int x, int y, int z, Random rand)
+    {
+        // using BlockFluidClassic as a reference and updating the tile entities for blocks being flowed into
+        LiquidTileEntity tileEntity = (LiquidTileEntity)world.getTileEntity(x,y,z);
+
+        if (tileEntity != null && tileEntity.getBrew() != null) {
+
+            // this needed to be canFlowInto for some reason instead of canDisplace
+            if (canFlowInto(world, x, y + densityDir, z))  {
+                flowIntoBlock(world, x, y + densityDir, z, 1);
+                world.setTileEntity(x,y + densityDir,z,
+                    new LiquidTileEntity(tileEntity.getBrew(), tileEntity.getTicksRemaining()));
+                return;
+            }
+
+
+            if (isSourceBlock(world, x, y, z) || !isFlowingVertically(world, x, y, z)) {
+
+                boolean flowTo[] = getOptimalFlowDirections(world, x, y, z);
+
+                if (flowTo[0]) updateTileEntity(world, x - 1, y, z, tileEntity.getBrew(), tileEntity.getTicksRemaining());
+                if (flowTo[1]) updateTileEntity(world, x + 1, y, z, tileEntity.getBrew(), tileEntity.getTicksRemaining());
+                if (flowTo[2]) updateTileEntity(world, x, y, z - 1, tileEntity.getBrew(), tileEntity.getTicksRemaining());
+                if (flowTo[3]) updateTileEntity(world, x, y, z + 1, tileEntity.getBrew(), tileEntity.getTicksRemaining());
+            }
+        }
+
+        super.updateTick(world,x,y,z,rand);
+    }
+    // replaces the tile entity at a given position with one with an updated brew
+    private void updateTileEntity(World world, int x, int y, int z, Brew brew, int ticksRemaining) {
+        if (world.getBlock(x,y,z) == ModBlocks.BREW_FLUID.get()){
+            LiquidTileEntity tileEntity = (LiquidTileEntity)world.getTileEntity(x,y,z);
+            if (tileEntity == null || tileEntity.getBrew() == null) {
+                world.removeTileEntity(x,y,z);
+                world.setTileEntity(x,y,z, new LiquidTileEntity(brew, ticksRemaining));
+            }
+
         }
     }
 
