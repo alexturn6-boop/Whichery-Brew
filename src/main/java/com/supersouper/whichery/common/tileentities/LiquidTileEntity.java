@@ -4,13 +4,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
-import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 
-import com.supersouper.whichery.ModBlocks;
 import com.supersouper.whichery.common.BrewEffects.Brew;
 import com.supersouper.whichery.common.BrewEffects.BrewHelper;
 
@@ -19,11 +17,12 @@ public class LiquidTileEntity extends TileEntity {
     public Brew brew;
     public int ticksRemaining = 100;
 
-    public LiquidTileEntity(Brew brew, int ticksRemaining){
+    public LiquidTileEntity(Brew brew, int ticksRemaining) {
         this.brew = brew;
         this.ticksRemaining = ticksRemaining;
     }
-    public LiquidTileEntity(){
+
+    public LiquidTileEntity() {
         super();
     }
 
@@ -128,9 +127,12 @@ public class LiquidTileEntity extends TileEntity {
         return this.brew;
     }
 
-    public int getTicksRemaining() {return  this.ticksRemaining;}
+    public int getTicksRemaining() {
+        return this.ticksRemaining;
+    }
+
     @Override
-    public boolean canUpdate(){
+    public boolean canUpdate() {
         return this.brew != null && !Objects.equals(this.brew.id, "color");
     }
 
